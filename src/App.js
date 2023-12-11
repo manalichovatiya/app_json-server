@@ -1,29 +1,27 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
-  const [result, setresult] = useState([]);
-
+  const [result , setresult] = useState([])
   useEffect(() => {
-    fetch('http://localhost:3002/comments ')
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data);
-        setresult(data)
-      })
-  }, [])
+    axios.get("http://localhost:3002/posts").then((res) => {
+      setresult(res.data);
+    })
+  }, []);
 
   return (
     <>
       {
-        result?.map((v, i) => {
-          return (
-            <>
-              <h1>{v.id}</h1>
-              <h4>{v.title}</h4>
-              <p>{v.body}</p>
-            </>
-          )
+        result?.map((v,i)=>{
+         return (
+          <>
+          <h1>{v.id}</h1>
+          <h2>{v.title}</h2>
+          <h3>{v.author}</h3>
+          </>
+
+         )
         })
       }
     </>

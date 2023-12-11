@@ -1,18 +1,22 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "title": "manali",
+      "author": "wqeqw",
+      "id": 5
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "title": "qeqw",
+      "author": "wqeqw",
+      "id": 6
+    },
+    {
+      "title": "we ",
+      "author": "are",
+      "id": 7
     }
   ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }
