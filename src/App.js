@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function App() {
   const [result , setresult] = useState([])
+  // get API
   useEffect(() => {
     axios.get("http://localhost:3002/posts").then((res) => {
       setresult(res.data);
@@ -20,7 +21,6 @@ function App() {
           <h2>{v.title}</h2>
           <h3>{v.author}</h3>
           </>
-
          )
         })
       }

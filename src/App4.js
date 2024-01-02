@@ -3,8 +3,10 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
+    //CRUD full crud
     const [result, setresult] = useState([])
-    const [result1, setresult1] = useState({title:'',author:''})
+    const [result1, setresult1] = useState({})
+    const [index, setindex] = useState()
     // for post API
     const title = useRef();
     const author = useRef();
@@ -13,7 +15,7 @@ function App() {
         axios.get("http://localhost:3002/posts").then((res) => {
             setresult(res.data);
         })
-    }, [result]);
+    }, []);
 
     function submitData() {
         const input_ = {
@@ -26,26 +28,26 @@ function App() {
     }
 
     function deleteData(id) {
-        console.log(id , "delete");
-        axios.delete(`http://localhost:3002/posts/${id}`).then((res)=>{
+        console.log(id, "delete");
+        axios.delete(`http://localhost:3002/posts/${id}`).then((res) => {
             // console.log(res.status);
-            setresult(result.filter((e)=>e.id !== id))
+            setresult(result.filter((e) => e.id !== id))
         })
     }
 
-    function updateData(index){
-        // console.log(id,"update id");
-        // console.log(index,"update index");
-        setresult1(result[index]);
+    function updateData(v,i) {
+        setindex(i)
+        setresult1(v);
     }
 
-    function input_Update (e) {
-        setresult1({...result1,[e.target.name]:e.target.value})
+    function input_Update(e) {
+        setresult1({ ...result1, [e.target.name]: e.target.value })
     }
 
-    function updatefinal_Data(){
-        axios.put(`http://localhost:3002/posts/${result1.id}`,result1).then((res)=>{
-            
+    function updatefinal_Data() {
+        axios.put(`http://localhost:3002/posts/${result1.id}`, result1).then((res) => {
+        result.splice(index,1,result1)
+        setresult([...result])
         })
     }
     return (
@@ -62,10 +64,9 @@ function App() {
                         <>
                             <h2>{v.title}</h2>
                             <h3>{v.author}</h3>
-                            <button onClick={()=>deleteData(v.id)}>Delete</button>
-                            <button onClick={()=>updateData(i)}>Update</button>
+                            <button onClick={() => deleteData(v.id)}>Delete</button>
+                            <button onClick={() => updateData(v,i)}>Update</button>
                         </>
-
                     )
                 })
             }
